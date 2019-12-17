@@ -1,0 +1,228 @@
+
+
+mysql> use world;
+Database changed
+mysql> select city.name, country.name from
+    -> city inner join country
+    -> on city.countrycode = country.code
+    -> where country.code = 'idn';
++------------------+-----------+
+| name             | name      |
++------------------+-----------+
+| Jakarta          | Indonesia |
+| Surabaya         | Indonesia |
+| Bandung          | Indonesia |
+| Medan            | Indonesia |
+| Palembang        | Indonesia |
+| Tangerang        | Indonesia |
+| Semarang         | Indonesia |
+| Ujung Pandang    | Indonesia |
+| Malang           | Indonesia |
+| Bandar Lampung   | Indonesia |
+| Bekasi           | Indonesia |
+| Padang           | Indonesia |
+| Surakarta        | Indonesia |
+| Banjarmasin      | Indonesia |
+| Pekan Baru       | Indonesia |
+| Denpasar         | Indonesia |
+| Yogyakarta       | Indonesia |
+| Pontianak        | Indonesia |
+| Samarinda        | Indonesia |
+| Jambi            | Indonesia |
+| Depok            | Indonesia |
+| Cimahi           | Indonesia |
+| Balikpapan       | Indonesia |
+| Manado           | Indonesia |
+| Mataram          | Indonesia |
+| Pekalongan       | Indonesia |
+| Tegal            | Indonesia |
+| Bogor            | Indonesia |
+| Ciputat          | Indonesia |
+| Pondokgede       | Indonesia |
+| Cirebon          | Indonesia |
+| Kediri           | Indonesia |
+| Ambon            | Indonesia |
+| Jember           | Indonesia |
+| Cilacap          | Indonesia |
+| Cimanggis        | Indonesia |
+| Pematang Siantar | Indonesia |
+| Purwokerto       | Indonesia |
+| Ciomas           | Indonesia |
+| Tasikmalaya      | Indonesia |
+| Madiun           | Indonesia |
+| Bengkulu         | Indonesia |
+| Karawang         | Indonesia |
+| Banda Aceh       | Indonesia |
+| Palu             | Indonesia |
+| Pasuruan         | Indonesia |
+| Kupang           | Indonesia |
+| Tebing Tinggi    | Indonesia |
+| Percut Sei Tuan  | Indonesia |
+| Binjai           | Indonesia |
+| Sukabumi         | Indonesia |
+| Waru             | Indonesia |
+| Pangkal Pinang   | Indonesia |
+| Magelang         | Indonesia |
+| Blitar           | Indonesia |
+| Serang           | Indonesia |
+| Probolinggo      | Indonesia |
+| Cilegon          | Indonesia |
+| Cianjur          | Indonesia |
+| Ciparay          | Indonesia |
+| Lhokseumawe      | Indonesia |
+| Taman            | Indonesia |
+| Depok            | Indonesia |
+| Citeureup        | Indonesia |
+| Pemalang         | Indonesia |
+| Klaten           | Indonesia |
+| Salatiga         | Indonesia |
+| Cibinong         | Indonesia |
+| Palangka Raya    | Indonesia |
+| Mojokerto        | Indonesia |
+| Purwakarta       | Indonesia |
+| Garut            | Indonesia |
+| Kudus            | Indonesia |
+| Kendari          | Indonesia |
+| Jaya Pura        | Indonesia |
+| Gorontalo        | Indonesia |
+| Majalaya         | Indonesia |
+| Pondok Aren      | Indonesia |
+| Jombang          | Indonesia |
+| Sunggal          | Indonesia |
+| Batam            | Indonesia |
+| Padang Sidempuan | Indonesia |
+| Sawangan         | Indonesia |
+| Banyuwangi       | Indonesia |
+| Tanjung Pinang   | Indonesia |
++------------------+-----------+
+85 rows in set (0.03 sec)
+
+mysql> create view kotaIdn as
+    -> select city.name as kota, country.name as negara from
+    -> city inner join country
+    -> on city.countrycode = country.code
+    -> where country.code = 'idn';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from kotaIdn;
+
+mysql> show tables;
++-----------------+
+| Tables_in_world |
++-----------------+
+| city            |
+| country         |
+| countrylanguage |
+| kotaidn         |
++-----------------+
+4 rows in set (0.00 sec)
+
+mysql> alter view kotaIdn as
+    -> select id, city.name as kota, country.name as negara from
+    -> city inner join country
+    -> on city.countrycode = country.code
+    -> where country.code = 'idn';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> describe kotaIdn;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| id     | int(11)  | NO   |     | 0       |       |
+| kota   | char(35) | NO   |     |         |       |
+| negara | char(52) | NO   |     |         |       |
++--------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+mysql> create table tableAB(
+    -> user_id int(11),
+    -> bagian_id int(11)
+    -> );
+Query OK, 0 rows affected, 2 warnings (0.06 sec)
+
+mysql> describe tableab;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| user_id   | int(11) | YES  |     | NULL    |       |
+| bagian_id | int(11) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> use latihandatabase;
+Database changed
+mysql> create table tableAB(
+    -> user_id int(11),
+    -> bagian_id int(11)
+    -> );
+Query OK, 0 rows affected, 2 warnings (0.06 sec)
+
+mysql> describe tableA;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id_user   | int(11)      | NO   | PRI | NULL    |       |
+| username  | varchar(255) | YES  |     | NULL    |       |
+| id_bagian | int(11)      | YES  |     | 0       |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> (1, 1),
+    -> (2, 2),
+    -> (3, 2),
+    -> (4, 2),
+    -> (5, 3),
+    -> (6, 4);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1, 1),
+(2, 2),
+(3, 2),
+(4, 2),
+(5, 3),
+(6, 4)' at line 1
+mysql> show tables;
++---------------------------+
+| Tables_in_latihandatabase |
++---------------------------+
+| buyer                     |
+| karyawan                  |
+| seller                    |
+| tablea                    |
+| tableab                   |
+| tableb                    |
++---------------------------+
+6 rows in set (0.00 sec)
+
+mysql> describe tableab;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| user_id   | int(11) | YES  |     | NULL    |       |
+| bagian_id | int(11) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into tableab values
+    -> (1, 1),
+    -> (2, 2),
+    -> (3, 2),
+    -> (4, 2),
+    -> (5, 3),
+    -> (6, 4);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from tableab;
++---------+-----------+
+| user_id | bagian_id |
++---------+-----------+
+|       1 |         1 |
+|       2 |         2 |
+|       3 |         2 |
+|       4 |         2 |
+|       5 |         3 |
+|       6 |         4 |
++---------+-----------+
+6 rows in set (0.00 sec)
+
+mysql>

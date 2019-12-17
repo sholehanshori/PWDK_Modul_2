@@ -1,0 +1,32 @@
+
+select * from  . . . .
+
+select city.name, country.name from
+city inner join country
+on city.countrycode = country.code
+where country.code = 'idn';
+
+
+use ptabc
+
+insert into tabelab values
+(1, 1),
+(2, 2),
+(3, 2),
+(4, 2),
+(5, 3),
+(6, 4);
+
+select * from tabelab;
+
+~~~~~ Menggabungkan 2 tabel menggunakan 1 tabel ~~~~~
+select * from
+tabelA inner join tabelAB
+on tableA.id_user = tabelAB.user_id
+inner join tabelB
+on tabelB.id_bagian = tabelAB.bagian_id;
+
+~~~~~ Khususon inner join ~~~~~
+select username, namabagian from
+tabelA A, tabelAB AB, tabelB tabelB
+where A.id_user = ab.user_id and b.id_bagian = ab.bagian_id;

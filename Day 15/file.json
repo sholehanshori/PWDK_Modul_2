@@ -1,0 +1,26 @@
+[
+    {
+        "No.": 1,
+        "Name Item": "Gundam",
+        "Price": 1000,
+        "Quantity": 3
+    },
+    {
+        "No.": 2,
+        "Name Item": "Tamiya",
+        "Price": 500,
+        "Quantity": 4
+    },
+    {
+        "No.": 3,
+        "Name Item": "Beyblade",
+        "Price": 250,
+        "Quantity": 2
+    },
+    {
+        "No.": 4,
+        "Name Item": "Figure",
+        "Price": 1200,
+        "Quantity": 1
+    }
+]

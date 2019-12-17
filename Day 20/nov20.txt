@@ -1,0 +1,143 @@
+MySQL
+
+Jenisnya adalah relational
+
+./mysql -u root -p
+masukkan password root di bin
+
+create database (nama db);
+-> Untuk membuat database
+
+create database (nama db) if not exist;
+-> Cek, sekaligus buat database
+
+use (namadb);
+-> menggunakan db
+
+select database()
+-> cek bekerja di mana db nya
+
+show tables;
+-> cek apakah apa tabelnya
+
+create table pedagang (
+-> input kolom
+
+describe (nama tabel);
+-> liat struktur tabel
+
+drop database (nama db);
+-> untuk menghapus database
+
+drob table (nama tabel):
+-> untuk menghapus tabel
+
+select * from (nama tabel) limit 2;
+-> hanya mengambil 2 buah data awal
+
+select * from (nama tabel) limit 2,1;
+-> mengambil 1 data setelah 2 data awal
+
+select * from (nama tabel);
+->melihat semua data
+
+insert into (nama tabel) values (berdasar kolom)
+-> memasukkan data
+
+no int not null auto_increment
+-> nomor otomatis dan tidak bisa kosong
+
+created_at timestamp default current_timestamp
+-> membuat timestamp
+
+delete from (nama tabel)
+-> menghapus data
+
+
+
+
+select nama, gaji, 0.03*gaji as pot_bpjs from karyawan;
+-> untuk memasukkan info tambahan potongan bpjs dari gaji karyawan
+
+select * from karyawan order by nama;
+-> untuk mengurutkan nama karyawan berdasarkan alfabet
+
+select * from karyawan where nama = 'Anna';
+-> untuk mencari data nama tertentu
+
+select * from karyawan where gaji between 4000000 and 8000000;
+select * from karyawan where gaji > 4000000 and gaji < 8000000;
+-> Untuk memfilter jumlah gaji yg di inginkan
+
+select * from karyawan where nama like 'a%';
+select * from karyawan where nama like 'a*';
+-> untuk mencari nama dengan awalan huruf 'A'
+
+select * from karyawan where nama like '%i';
+-> untuk mencari nama dengan akhirnya huruf 'i'
+
+select count(*) from karyawana;
+-> jumlah tabel yg ada di dalam karyawan
+
+select count(nama) from karyawan where nama = 'Anna';
+-> untuk mencari jumlah nama secara spesifik
+
+select max(gaji) from karyawan;             select max(gaji) as gaji_tertinggi from karyawan;
+select min(gaji) from karyawan;
+-> untuk mencari nilai maksimum dan minimum dari gaji
+
+select sum(gaji) from karyawan;
+select avg(gaji) from karyawan;
+-> untuk mencari rata2 gaji dan total gaji
+
+select * from karyawan where gaji < (select avg(gaji) from karyawan);      # Subquerry
+-> Untuk memfilter data berdasarkan gaji yg di bawah nilai rata-rata gaji
+
+select avg(gaji) from karyawan where gaji < (select avg(gaji) from karyawan);      # Subquerry
+-> Untuk mencari rata-rata gaji berdasarkan gaji yg di bawah nilai rata-rata gaji
+
+select avg(gaji) from (
+select * from karyawan where gaji < (
+select avg(gaji) from karyawan
+)) as myQuerry;
+-> Sama seperti di atas, tapi harus diberlikan 'alias' supaya ada kepastian
+
+delete from karyawan where id_kar = 2;      atau sex = 'pria';       atau gaji > 5000000;
+-> untuk mendelete data tertentu
+
+update karyawan set
+nama = 'Ani'
+where sex = 'wanita';
+-> Untuk meng-update atau merubah isi dari tabel
+
+alter table karyawan
+add column
+alamat text;
+-> Untuk menambahkan column di dalam tabel
+
+alter table karyawan
+add column
+alamat text
+after sex;
+-> Penempatan column 'alamat' setelah sex, bukan di posisi terakhir
+
+alter table karyawan
+drop column alamat;
+-> Untuk menghapus column di dalam tabel
+
+alter table karyawan
+modify column
+sex set('pria', 'wanita')
+after gaji;
+-> untuk memindahkan column
+
+alter table karyawan
+rename column
+sex to gender;
+-> untuk merubah nama column
+
+alter user 'lintang'@'localhost'
+identified with mysql_native_password by '12345';
+
+create table tabelA
+insert into tabelA

@@ -1,0 +1,177 @@
+show dbs
+
+show databases
+
+db
+
+use tokoonline	(bikin sekaligus pakai)
+
+db
+
+show dbs	(tokoonline tidak ada karena belum ada isinya)
+
+db
+
+db.createCollection('pelapak');
+
+show dbs	(baru ada tokoonline)
+
+show collections	(mirip show tables)
+
+db.pelapak.drop()
+
+show collections;	(sudah tidak muncul karena di drop)
+
+db
+
+use tokoonline
+
+db.dropDatabase()	(cara hapus database)
+
+
+
+(bikin lagi, tapi menggunakan user dll)
+
+use tokoonline
+
+db.createUser({
+... user: "lintang",
+... pwd: '12345',
+... roles: ['dbAdmin', 'readWrite']
+... })
+
+db
+
+show users;
+
+db.getUsers()
+
+db.getUsers({showCredentials: true})	(Untuk menampilkan password)  #optional
+
+###(membuat data)###
+
+db
+
+db.createCollection('seller')
+
+show collections
+
+db.seller.insert({nama: 'Andi', usia: 22})
+
+db.seller.insert([
+... {nama:'Budi', usia: 23},
+... {nama:'Caca', usia: 24}
+...])
+
+db.seller.find()
+
+db.seller.find().pretty()	(agar tampilanya lebih rapi)
+
+db.seller.insert({nama: 'Deni', kota: 'Jakarta', job: 'PNS'})		(Tidak harus berisi yg mirip dengan sebelumnya)
+
+db.seller.find().pretty()
+
+db.seller.remove({}); 		(untuk menghapus semua)
+
+db.seller.remove({job: 'PNS'});		(Menghilangkan hanya yg memiliki job PNS)
+
+db.seller.update(			(Untuk mengupdate data yg ada di dalam database)
+... {nama: 'Andi'},
+... {nama: 'Andi', kota: 'Jakarta'})
+
+db.seller.find().pretty()		(Ternyata data dari Andi di re-write semua, jadi data tentang usianya hilang)
+
+db.seller.update(
+... {nama: 'Andi'},
+... {$set: {kota: 'Cimahi'}});
+
+db.seller.find().pretty()
+
+db.seller.update(
+... {nama: 'Andi'},
+... {$set: {job: 'PNS'}});
+
+db.seller.find().pretty()
+
+db.seller.update({}, {$set: {Nationality: 'Indonesia'}});	(Mengecek apakah bisa update semua?)
+
+db.seller.find().pretty()					(Ternyata tidak bisa, sehingga perlu command yg lain)
+
+
+db.seller.updateMany({}, {$set: {Nationality: 'Indonesia'}});	(Untuk mengupdate semua data yg ada di dalam)
+
+db.seller.find().pretty()
+
+
+db.seller.updateMany(
+... {},
+... {$rename: {'nama': 'name'}}
+... )
+
+db.seller.find().pretty()
+
+
+
+db.seller.find({"_id" : ObjectId("5ddb4f028292f379785ceb37")})		(untuk mencari data tertentu)
+
+
+db.seller.find(ObjectId("5ddb4f028292f379785ceb37"))			(untuk mencari data tertentu dengan object ID)
+
+
+#### (Untuk filter data) ####
+
+db.seller.find(
+... {usia: {$gt: 23}}		(gt=GreaterThan, gte=GreaterThanEqual, lt=LowerThan, lte=LowerThanEqual)
+... )
+
+
+db.seller.find(
+... {$or: [{name:'Andi'}, {name:'Caca'}]}	(penggunaan 'or' bisa juga 'and')
+... ).pretty()
+
+
+db.seller.insert(
+... {name: 'Agus', usia: 30, Nationality: 'Indonesia'}
+... )
+
+db.seller.find().pretty()
+
+
+#### Filter data hanya yg nationality: Indonesia dan usia >= 25 ####
+
+db.seller.find(
+... {$and: [{Nationality: 'Indonesia'}, {usia : {$gte:25}}]
+... }).pretty()
+
+
+
+db.seller.insert(
+... {
+... name: 'Euis', address: {
+... city: 'Cimahi', zipcode: '123456', gps: [
+... {lat: 123}, {long: 789}
+... ]}})
+
+db.seller.find({nama: 'Euis'}).pretty()
+
+
+
+db.seller.find().sort({usia: 1})	(sort ascending)
+
+db.seller.find().sort({usia: -1})	(sort descending)
+
+
+ctrl + c untuk keluar
+
+
+mongoimport --db resto --collection resto --file restaurants.json --jsonArray
+
+
+
+cd C:\Program Files\MongoDB\Server\4.2\bin
+mongod --dbpatch c:/data/db
+
+
+cd C:\Program Files\MongoDB\Server\4.2\bin
+mongo
+

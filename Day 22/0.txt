@@ -1,0 +1,110 @@
+#  ------------------------ Jumat, 22 November 2019 -----------------------------------
+
+use ptabc
+
+select database();
+select * karyawan;
+
+show tables;
+
+create table tabelA (
+    id_user int,
+    username varchar(255),
+    primary key(id_user)
+    ;
+)
+describe tabelA;
+
+create table tabelB (
+    id_bagian int,
+    namaBagian varchar(255)
+    ;
+)
+describe tabelB;
+
+insert into tabelA values
+(1, 'Andi', 1),
+(2, 'Budi', 1),
+(3, 'Caca', 2),
+(4, 'Doni', 2),
+(5, 'Euis', 1)
+;
+select * from tabelA;
+
+insert into tabelB values
+(1, 'Human Resources')
+(2, 'Marketing')
+(3, 'Finance')
+(4, 'Engineer')
+;
+select * from tabelB;
+
+# ----------------------------------------------
+~~~~~ Central Join ~~~~~
+select username, namaBagian from
+tabelA inner join tabelB
+on tabelA.id_bagian = tabelB.id_bagian;
+
+#### Atau ####
+select username, namaBagian from
+tabelA inner join tabelB
+where tabelA.id_bagian = tabelB.id_bagian;
+
+#### Atau bila nama column sama ####
+select username, namaBagian from
+tabelA inner join tabelB
+using (id_bagian);
+
+#### Atau lebih ringkas ####
+select username, namaBagian from
+tabelA join tabelB
+using (id_bagian);
+
+# ----------------------------------------------
+~~~~~ Left Join ~~~~~
+select username, namaBagian from
+tabelA left join tabelB
+on tabelA.id_bagian = tabelB.id_bagian;
+#### Data di tabelA ditampilkan semua, untuk tabelB yg hanya ada irisan
+
+~~~~~ Right Join ~~~~~
+select username, namaBagian from
+tabelA right join tabelB
+on tabelA.id_bagian = tabelB.id_bagian;
+#### Data di tabelB ditampilkan semua, untuk tabelA yg hanya ada irisan
+
+~~~~~ Mengambil yg tidak ada di Right ~~~~~
+select username, namaBagian from
+tabelA left join tabelB
+on tabelA.id_bagian = tabelB.id_bagian
+where tabelB.namaBagian is null;
+
+~~~~~ Mengambil yg tidak ada di Left ~~~~~
+select username, namaBagian from
+tabelA right join tabelB
+on tabelA.id_bagian = tabelB.id_bagian
+where tabelA.username is null;
+
+~~~~~ Cross Join ~~~~~
+select username, namaBagian from
+tabelA cross join tabelB;
+
+~~~~~ Union Join ~~~~~
+select username, namaBagian from
+tabelA left outer join tabelB
+using (id_bagian)
+union
+select username, namaBagian from
+tabelA right outer join tabelB
+using (id_bagian);
+
+~~~~~ Outer Union Join ~~~~~
+select username, namaBagian from
+tabelA left outer join tabelB
+using (id_bagian)
+where tabelB.id_bagian is null
+union
+select username, namaBagian from
+tabelA right outer join tabelB
+using (id_bagian);
+where tabelA.username is null;
