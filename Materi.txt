@@ -1,0 +1,9 @@
+MySQL
+MongoDB
+Numpy
+Pandas mean, median, mode, quartil, 25 50 75
+        distribusi
+        dataframe, join, interpolate
+matplotlib
+seaborn
+plotly
